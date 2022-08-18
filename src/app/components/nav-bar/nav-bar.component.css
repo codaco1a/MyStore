@@ -1,0 +1,21 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.navbar-brand {
+  margin-left: 30px;
+}
+
+.navbar-brand span {
+  font-weight: 700;
+  font-size: 30px;
+  color: #0275d8;
+}
+
+.navbar-nav {
+  position: absolute;
+  right: 20px;
+}

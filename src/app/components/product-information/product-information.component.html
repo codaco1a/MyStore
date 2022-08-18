@@ -1,0 +1,14 @@
+<div class="detail-container">
+  <img src="{{ product.url }}" alt="{{ product.name }} photo" />
+  <br /><br />
+  <h3>{{ product.name }}</h3>
+  <p>
+    <strong>${{ product.price }}</strong>
+  </p>
+  <p>{{ product.description }}</p>
+  <button class="btn btn-primary" (click)="addToCart(product)">
+    Add To Cart
+  </button>
+  <br /><br />
+  <a routerLink="/">&lt; Back To Home</a>
+</div>
