@@ -43,4 +43,10 @@ export class CartComponent implements OnInit {
     this.orderService.createOrder(order);
     this.router.navigate(['/confirm']);
   }
+
+  emptyCart(): void {
+    this.cartService.emptyCart();
+    this.cartItems = [];
+    this.total = 0;
+  }
 }

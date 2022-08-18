@@ -30,4 +30,9 @@ export class CartService {
   getTotalPrice(): number {
     return this.total;
   }
+
+  emptyCart(): void {
+    this.cartItems = [];
+    this.total = 0;
+  }
 }

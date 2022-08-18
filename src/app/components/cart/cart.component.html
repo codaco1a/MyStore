@@ -10,12 +10,15 @@
     </div>
   </div>
   <br /><br />
+
   <div class="total-container">
     <strong
       ><p>Total Price is: ${{ total }}</p></strong
     >
+    <button (click)="emptyCart()" class="btn btn-danger">Empty Cart</button>
   </div>
-  <form #form id="form" (ngSubmit)="confirm()">
+  <br /><br />
+  <form #form="ngForm" id="form" (ngSubmit)="confirm()">
     <div class="form-group">
       <label for="customer_name">Full Name: </label>
       <input
@@ -25,6 +28,8 @@
         id="customer_name"
         placeholder="Enter Your Full Name"
         [(ngModel)]="customer_name"
+        required
+        minlength="5"
       />
     </div>
     <br />
@@ -37,6 +42,8 @@
         id="customer_address"
         placeholder="Add Your Address Detailes"
         [(ngModel)]="customer_address"
+        required
+        minlength="10"
       />
     </div>
     <br />
@@ -49,12 +56,24 @@
         id="credit_card"
         placeholder="Add Credit Card Number"
         [(ngModel)]="credit_card"
+        required
+        minlength="12"
       />
     </div>
     <br />
     <br />
-    <button type="submit" class="btn btn-primary">Check Out</button>
+    <input
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      value="Check Out"
+    />
   </form>
   <br />
   <br />
+</div>
+<div *ngIf="form.invalid && form.dirty">
+  <p>Name must be at least 5 carachters.</p>
+  <p>Address must be at least 10 character.</p>
+  <p>Credit card must be 12 numbers.</p>
 </div>
