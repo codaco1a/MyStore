@@ -28,6 +28,7 @@ export class CartItemsComponent implements OnInit {
   removeItem(product: Product): void {
     this.cartService.removeItem(product);
     this.adjustCart();
+    alert(product.name + ' has been removed from cart!');
   }
 
   emptyCart(): void {
