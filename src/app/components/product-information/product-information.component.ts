@@ -50,7 +50,11 @@ export class ProductInformationComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
+    if (this.cartService.checkItem(product)) {
+      alert('this product has been added already to the cart');
+      return;
+    }
     this.cartService.addToCart(product);
-    alert(product.name + 'has been added to the cart!');
+    alert(product.name + ' has been added to the cart!');
   }
 }

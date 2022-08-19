@@ -61,3 +61,10 @@ img {
   font-size: 22px;
   text-align: center;
 }
+
+.error__handling {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   total: number;
   customer_name: string;
   customer_address: string;
-  credit_card: number;
+  credit_card: number | null;
 
   constructor(
     private cartService: CartService,
@@ -25,10 +25,14 @@ export class CartComponent implements OnInit {
     this.total = 0;
     this.customer_name = '';
     this.customer_address = '';
-    this.credit_card = 0;
+    this.credit_card = null;
   }
 
   ngOnInit(): void {
+    this.adjustCart();
+  }
+
+  adjustCart(): void {
     this.cartItems = this.cartService.getCartItems();
     this.total = this.cartService.getTotalPrice();
   }
@@ -44,9 +48,15 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/confirm']);
   }
 
+  removeItem(product: Product): void {
+    this.cartService.removeItem(product);
+    this.adjustCart();
+  }
+
   emptyCart(): void {
     this.cartService.emptyCart();
     this.cartItems = [];
     this.total = 0;
+    alert('Cart items have been removed!');
   }
 }
