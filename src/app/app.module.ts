@@ -11,6 +11,8 @@ import { ProductInformationComponent } from './components/product-information/pr
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ConfirmPaymentComponent } from './components/confirm-payment/confirm-payment.component';
 import { FormsModule } from '@angular/forms';
+import { CartItemsComponent } from './components/cart/cart-items/cart-items.component';
+import { FormComponent } from './components/cart/form/form.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { FormsModule } from '@angular/forms';
     ProductInformationComponent,
     NavBarComponent,
     ConfirmPaymentComponent,
+    CartItemsComponent,
+    FormComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

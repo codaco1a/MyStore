@@ -1,0 +1,62 @@
+<div *ngIf="form.invalid" class="error__handling">
+  <div *ngIf="name.errors?.['minlength']">Minimum 5 characters</div>
+  <div *ngIf="address.errors?.['minlength']">Minimum 10 characters</div>
+  <div *ngIf="card.errors?.['minlength']">Minimum 12 numbers.</div>
+</div>
+<form #form="ngForm" id="form" (ngSubmit)="confirm()" [name]="name">
+  <div class="form-group">
+    <label for="customer_name">Full Name: </label>
+    <input
+      type="text"
+      name="customer_name"
+      class="form-control"
+      id="customer_name"
+      placeholder="Enter Your Full Name"
+      [(ngModel)]="customer_name"
+      required
+      minlength="5"
+      #name="ngModel"
+      (ngModelChange)="changeName()"
+    />
+  </div>
+  <br />
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input
+      type="text"
+      name="customer_address"
+      class="form-control"
+      id="customer_address"
+      placeholder="Add Your Address Detailes"
+      [(ngModel)]="customer_address"
+      required
+      minlength="10"
+      #address="ngModel"
+    />
+  </div>
+  <br />
+  <div class="form-group">
+    <label for="credit-card">Credit Card Number</label>
+    <input
+      type="tel"
+      name="credit_card"
+      class="form-control"
+      id="credit_card"
+      placeholder="Add Credit Card Number"
+      [(ngModel)]="credit_card"
+      required
+      minlength="12"
+      #card="ngModel"
+    />
+  </div>
+  <br />
+  <br />
+  <input
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid"
+    value="Check Out"
+  />
+</form>
+<br />
+<br />

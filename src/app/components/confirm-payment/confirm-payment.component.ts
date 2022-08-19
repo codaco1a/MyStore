@@ -15,7 +15,6 @@ export class ConfirmPaymentComponent implements OnInit {
       customer_name: '',
       customer_address: '',
       credit_card: 0,
-      total_price: 0,
     };
   }
 

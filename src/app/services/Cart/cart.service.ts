@@ -25,7 +25,6 @@ export class CartService {
     }
     this.cartItems.push(product);
     this.total = this.total + product.price;
-    console.log('added');
 
     return this.cartItems;
   }
@@ -54,7 +53,6 @@ export class CartService {
         this.cartItems.find((p) => p.id == product.id)
       );
       if (_debounce.isEqual(objA, objB)) {
-        console.log('they are equal');
         return true;
       }
     }

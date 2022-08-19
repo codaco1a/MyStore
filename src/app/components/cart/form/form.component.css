@@ -1,0 +1,23 @@
+#form {
+  align-items: center;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-margin {
+  margin-bottom: 12px;
+}
+
+.empty-cart-message {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.error__handling {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
