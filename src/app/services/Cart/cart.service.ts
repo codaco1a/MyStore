@@ -1,64 +1,91 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/modules/product';
-import * as _debounce from 'lodash';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartItems: Product[] = [];
+  cartItems: Product[];
   total: number;
 
   constructor() {
+    this.cartItems = [
+      {
+        id: 1,
+        name: '',
+        price: 0,
+        description: '',
+        url: '',
+      },
+    ];
     this.total = 0;
   }
 
   getCartItems(): Product[] {
-    return this.cartItems;
+    let products: Product[] = JSON.parse(
+      localStorage.getItem('Products') as unknown as string
+    );
+    this.cartItems = products;
+    return products;
   }
 
-  addToCart(product: Product, amount?: number): Product[] | void {
-    if (this.checkItem(product)) {
-      console.log('exists');
-
-      return;
+  addToCart(product: Product): Product[] | void {
+    let products: Product[];
+    if (localStorage.getItem('Products')) {
+      products = JSON.parse(
+        localStorage.getItem('Products') as unknown as string
+      );
+      if (!products.some((p) => p.id == product.id)) {
+        this.total = this.total + product.price;
+        products = [product, ...products];
+        localStorage.setItem('Products', JSON.stringify(products));
+        console.log('not included');
+        return products;
+      }
+      console.log('included');
+      return products;
     }
-    this.cartItems.push(product);
+    products = [product];
+    localStorage.setItem('Products', JSON.stringify(products));
     this.total = this.total + product.price;
+    console.log('new');
 
-    return this.cartItems;
+    return this.getCartItems();
   }
 
   getTotalPrice(): number {
+    this.total = 0;
+    let products = this.getCartItems();
+    products.forEach((p) => {
+      this.total = this.total + p.price;
+    });
     return this.total;
   }
 
   removeItem(product: Product): void {
-    const itemPrice: number = product.price;
-    const index: number = this.cartItems.findIndex((p) => p == product);
-    this.cartItems.splice(index, 1);
-    this.total = this.total - itemPrice;
+    const products: Product[] = this.getCartItems();
+    const index: number = products.findIndex((p) => p.id == product.id);
+    products.splice(index, 1);
+    this.total = this.total - product.price;
+    localStorage.setItem('Products', JSON.stringify(products));
+    this.getCartItems();
+    this.getTotalPrice();
   }
 
   emptyCart(): void {
-    this.cartItems = [];
+    localStorage.removeItem('Products');
     this.total = 0;
   }
 
-  // Function Hoisting
   checkItem(product: Product): boolean {
-    if (this.cartItems.includes(product)) {
-      const objA = JSON.stringify(product);
-      const objB = JSON.stringify(
-        this.cartItems.find((p) => p.id == product.id)
-      );
-      if (_debounce.isEqual(objA, objB)) {
-        return true;
-      }
-    }
+    let products: Product[] = JSON.parse(
+      localStorage.getItem('Product') as unknown as string
+    );
+    if (products.some((p) => p.id == product.id)) return true;
     return false;
   }
 }
+
 function index(index: any, i: number) {
   throw new Error('Function not implemented.');
 }

@@ -16,5 +16,6 @@ export class CartComponent implements OnInit {
   confirm(order: Order): void {
     this.orderService.createOrder(order);
     this.router.navigate(['/confirm']);
+    localStorage.clear();
   }
 }

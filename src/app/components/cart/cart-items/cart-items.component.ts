@@ -39,7 +39,13 @@ export class CartItemsComponent implements OnInit {
   }
 
   adjustCart(): void {
-    this.cartItems = this.cartService.getCartItems();
-    this.total = this.cartService.getTotalPrice();
+    if (localStorage.getItem('Products')) {
+      this.cartItems = this.cartService.getCartItems();
+      this.total = this.cartService.getTotalPrice();
+      return;
+    }
+    this.cartItems = [];
+    this.total = 0;
+    return;
   }
 }
